@@ -1,1 +1,6 @@
 Team DEAD Devlog
+
+ishitaG -- 2021-5-27 17:23
+- updated README
+- created basic file structure
+- created home page
