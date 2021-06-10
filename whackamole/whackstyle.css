@@ -1,0 +1,27 @@
+body {
+    background-color: rgb(183, 250, 224);
+}
+
+.grid {
+    display: flex;
+    width: 600px;
+    height: 600px;
+    border: 1px;
+    flex-wrap: wrap;
+}
+
+.hole {
+    width: 200px;
+    height: 200px;
+    border-style: solid;
+    border-color: black;
+    border-radius: 100px;
+    background-image: url("dirt.png");
+    background-size: cover;
+
+}
+
+.mole {
+    background-image: url("mole.png");
+}
+

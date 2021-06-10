@@ -4,3 +4,13 @@ ishitaG -- 2021-5-27 17:23
 - updated README
 - created basic file structure
 - created home page
+
+ishitaG -- 2021-6-1 8:21
+- add all games to home page
+
+ishitaG -- 2021-6-4 3:49
+- set up grid for whack-a-mole 
+- add mole to grid
+
+ishitaG -- 2021-6-10 6:57
+- finish all functionalities of whack-a-mole
