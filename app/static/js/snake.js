@@ -171,7 +171,5 @@ function change_direction(event){
 
 }
 
-
-
 // init game
 drawBoard()

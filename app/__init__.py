@@ -1,6 +1,5 @@
 from flask import Flask, render_template, session, request, redirect, url_for
 from uuid import uuid4
-from helpers import a_clean, get_greeting, tup_clean, a_remove, convert
 from time import localtime, strftime
 
 import datetime             # how to get current date / time
@@ -25,3 +24,13 @@ def root():
     if session.get("username"): # if the user is logged in, send them to their home page
         return user_page()
     return render_template("home.html")
+
+
+@app.route("/snake")
+def snake():
+    return render_template("snake.html")
+
+
+if __name__ == '__main__':
+    app.debug = True
+    app.run()
