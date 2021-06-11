@@ -30,6 +30,9 @@ def root():
 def snake():
     return render_template("snake.html")
 
+@app.route("/breaker")
+def breaker():
+    return render_template("breaker.html")
 
 if __name__ == '__main__':
     app.debug = True
