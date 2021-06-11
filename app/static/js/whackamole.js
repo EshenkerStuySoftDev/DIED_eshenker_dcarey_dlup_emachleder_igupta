@@ -40,7 +40,7 @@ holes.forEach( hole => {
             // add one to the current score
             currentScore++;
             // update score
-            score.innerHTML = "SCORE: " + currentScore;
+            score.innerHTML = currentScore;
             // reset the mole hole so user doesn't get extra points by clicking on the same mole multiple times
             moleHole = null;
         }
