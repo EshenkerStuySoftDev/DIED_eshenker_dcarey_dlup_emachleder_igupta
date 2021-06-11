@@ -14,3 +14,7 @@ ishitaG -- 2021-6-4 3:49
 
 ishitaG -- 2021-6-10 6:57
 - finish all functionalities of whack-a-mole
+
+deanC -- 2021-6-12 5:44
+- Implement SQL methods
+- Attempt to implement high score functionality

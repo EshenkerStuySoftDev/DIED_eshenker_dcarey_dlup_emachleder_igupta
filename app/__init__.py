@@ -7,6 +7,7 @@ from flask import Flask, render_template, session, request, redirect, url_for
 from uuid import uuid4
 from time import localtime, strftime
 
+import db_builder
 import datetime             # how to get current date / time
 import sqlite3
 import os
