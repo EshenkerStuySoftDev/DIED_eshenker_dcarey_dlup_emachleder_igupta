@@ -9,7 +9,7 @@ var time = document.getElementById("time");
 var currentScore = 0;
 
 // set initial time to 60 seconds
-var currentTime = 10;
+var currentTime = 60;
 
 // the hole where the mole currently is
 var moleHole;
