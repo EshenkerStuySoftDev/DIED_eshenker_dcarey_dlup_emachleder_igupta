@@ -79,7 +79,7 @@ function drawBoard() {
         move_snake();
         //For Everything in the snek
         drawSnek();
-        DrawFruit()
+        DrawFruit();
 
         //if (v[0] != 0 | v[1] != 0) {
         //        
@@ -199,8 +199,6 @@ function change_direction(event){
     }
 
 }
-
-
 
 // init game
 //drawBoard()
