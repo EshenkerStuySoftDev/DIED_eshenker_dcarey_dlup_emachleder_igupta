@@ -1,5 +1,7 @@
 var c = document.getElementById("board");
-
+document.getElementById("restart").onclick = function() {
+	restart();
+}
 var wd = c.width;
 var ht = c.height;
 var ctx = c.getContext("2d");
@@ -11,11 +13,13 @@ var time = 0;
 
 var boardsize = 10;
 var mineamount = 10;
-
 var gameboard;
+var timeouts = [];
+//then, store when you create them
+
 function main(){
 	
-	setTimeout(updatetimer,1000);
+	timeouts.push(setTimeout(updatetimer,1000));
 	document.getElementById("info").innerHTML = "boardsize = " + boardsize + " <br> mineamount = " + mineamount;
 	ctx.fillStyle = "gray";
 	ctx.fillRect(0,0,wd,ht);
@@ -25,11 +29,28 @@ function main(){
 	gameboard = findneighbors(gameboard);
 }
 
+function restart(){
+	for (var i = 0; i < timeouts.length; i++) {
+		clearTimeout(timeouts[i]);
+	}
+	timeouts = [];
+	lost = false;
+	won = false;
+	correct = 0;
+	wrong = 0;
+	time = 0;
+	document.getElementById("status").innerHTML = "Make a Move!";
+	document.getElementById("time").innerHTML = "Time Passed: " + time + " seconds.";
+	main();
+}
+
+
+
 function updatetimer(){
 	if (!won && !lost) {
 		time++;
 		document.getElementById("time").innerHTML = "Time Passed: " + time + " seconds.";
-		setTimeout(updatetimer,1000);
+		timeouts.push(setTimeout(updatetimer,1000));
 	}
 }
 
@@ -296,6 +317,7 @@ function gamewon(){
 }
 
 function gamelost(loseid){
+	clearTimeout();
 	lost = true;
 	document.getElementById("status").innerHTML = "You lost after " + time + " seconds.";
 	let cell;
