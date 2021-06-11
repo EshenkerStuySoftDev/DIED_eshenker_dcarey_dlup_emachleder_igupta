@@ -2,10 +2,11 @@
 // Setup inital variables to make life eaiser
 var c = document.getElementById("board");
 var scoreboard = document.getElementById("score");
+var status = document.getElementById("status");
 var wd = c.width;
 var ht = c.height;
 var ctx = c.getContext("2d");
-var lost = false;
+var lost = true;
 
 var requestID;
 // the body of the snake with it being located roughtly around the center of the canvas
@@ -31,42 +32,43 @@ ctx.strokeStyle = "black";
 
 /// Drawing the snek for the first time
 drawSnek();
-DrawFruit();
+//DrawFruit();
 // Basically the game -> reset the board -> redraw snek -> check if fruit is not collide -> play snak
 
 document.addEventListener("keydown", change_direction);
 
 function restart(){
-    /*
-    var snek = [
+    document.getElementById("status").innerHTML = "Eat the fruit to grow bigger!";
+    ctx.clearRect(0,0,wd,ht);
+    snek = [
         [wd/2, ht/2], 
         [(wd/2)-(wd/50), ht/2], 
         [(wd/2)-2*(wd/50), ht/2], 
         [(wd/2)-3*(wd/50), ht/2],
         [(wd/2)-4*(wd/50), ht/2]
     ];
-    var fruit = null;
-
+    fruit = null;
+    
     // direction
-    var dx = wd/50;
-    var dy = 0;
+    dx = wd/50;
+    dy = 0;
 
-    var turning = false;
+    turning = false;
 
-    var score = 0;
+    score = 0;
     ctx.strokeStyle = "black";
-
+    scoreboard.innerHTML = score;
     /// Drawing the snek for the first time
     drawSnek();
     DrawFruit();
     drawBoard();
-    */
 }
 
 function drawBoard() {
 
     if (snekCollide()) {
-        gameEnd;
+
+        gameEnd();
         return;
     }
     turning = false;
@@ -142,24 +144,16 @@ function FruitTesting() {
 
 // ends the game
 function gameEnd() {
-    //window.cancelAnimationFrame(requestID); //End Animation
-    console.log("does this run 0");
+    window.cancelAnimationFrame(requestID); //End Animation
     requestID = null;
-    console.log("does this run 1");
-    snek = [[wd/2, ht/2], [(wd/2)-(wd/50), ht/2], [(wd/2)-2*(wd/50), ht/2], [(wd/2)-3*(wd/50), ht/2]]; //Reset Snek
     v = [0,0];
-    score = 0;
     lost = true;
     // clears timeout
     clearTimeout();
-    console.log("does this run 2");
     // update the score
     scoreboard.innerHTML = score;
+    document.getElementById("status").innerHTML = "You lose! Press W, A, S, or D to start!";
     fruit = null;
-    console.log("does this run 3");
-    ctx.clearRect(0,0,wd,ht);
-    drawSnek();
-    console.log("does this run 4");
 
 }
 
@@ -200,7 +194,7 @@ function change_direction(event){
             dy = wd/50;
         }
     } else {
-        
+        lost = false;
         restart();
     }
 
@@ -209,4 +203,4 @@ function change_direction(event){
 
 
 // init game
-drawBoard()
+//drawBoard()
