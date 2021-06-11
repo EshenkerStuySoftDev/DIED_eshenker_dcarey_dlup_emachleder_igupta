@@ -1,15 +1,11 @@
-// Team Candian Owls: Karl Hernandez, Dragos, Arib
-// SoftDev
-// K30 -- JSorcery
-// 2021-05-15
-
+//Taken partialy from team Canadian Owls: Karl Hernandez, Dragos Lup, Arib C
 // Setup inital variables to make life eaiser
 var c = document.getElementById("board");
 var scoreboard = document.getElementById("score");
 var wd = c.width;
 var ht = c.height;
 var ctx = c.getContext("2d");
-
+var lost = false;
 
 var requestID;
 // the body of the snake with it being located roughtly around the center of the canvas
@@ -40,10 +36,39 @@ DrawFruit();
 
 document.addEventListener("keydown", change_direction);
 
+function restart(){
+    /*
+    var snek = [
+        [wd/2, ht/2], 
+        [(wd/2)-(wd/50), ht/2], 
+        [(wd/2)-2*(wd/50), ht/2], 
+        [(wd/2)-3*(wd/50), ht/2],
+        [(wd/2)-4*(wd/50), ht/2]
+    ];
+    var fruit = null;
+
+    // direction
+    var dx = wd/50;
+    var dy = 0;
+
+    var turning = false;
+
+    var score = 0;
+    ctx.strokeStyle = "black";
+
+    /// Drawing the snek for the first time
+    drawSnek();
+    DrawFruit();
+    drawBoard();
+    */
+}
+
 function drawBoard() {
 
-    if (snekCollide()) 
+    if (snekCollide()) {
+        gameEnd;
         return;
+    }
     turning = false;
     setTimeout(function OnTick(){
         //clearTimeout();
@@ -79,8 +104,7 @@ function snekCollide() {
             return true;
         }
     }
-    console.log(snek[0][0]);
-    //console.log(wd);
+
     //No idea why i have to do wd-wd/50, but it works that way.
     return (snek[0][0] <= 0 | snek[0][1] <= 0 | snek[0][0] >= (wd-wd/50) | snek[0][1] >= (ht-ht/50)); //Check if snake hit wall
 }
@@ -118,18 +142,24 @@ function FruitTesting() {
 
 // ends the game
 function gameEnd() {
-    window.cancelAnimationFrame(requestID); //End Animation
+    //window.cancelAnimationFrame(requestID); //End Animation
+    console.log("does this run 0");
     requestID = null;
+    console.log("does this run 1");
     snek = [[wd/2, ht/2], [(wd/2)-(wd/50), ht/2], [(wd/2)-2*(wd/50), ht/2], [(wd/2)-3*(wd/50), ht/2]]; //Reset Snek
     v = [0,0];
     score = 0;
+    lost = true;
     // clears timeout
     clearTimeout();
+    console.log("does this run 2");
     // update the score
     scoreboard.innerHTML = score;
     fruit = null;
+    console.log("does this run 3");
     ctx.clearRect(0,0,wd,ht);
     drawSnek();
+    console.log("does this run 4");
 
 }
 
@@ -142,34 +172,41 @@ function drawSnek() {
 }
 
 function change_direction(event){
-    //console.log("I can hear you 1 ");
-    if (turning) return;
-    //console.log("I can hear you 2");
-    turning = true;
+    if (!lost) {
 
-    const movingUp = (dy === -wd/50);
-    const movingDown = (dy === wd/50);
-    const movingLeft = (dx === -wd/50);
-    const movingRight = (dx === wd/50);
-    //console.log(event.keyCode);
-    if ((event.keyCode == 37 || event.keyCode == 65) && !movingRight){
-        dx = -wd/50;
-        dy = 0;
-    }
-    if ((event.keyCode == 38 || event.keyCode == 87) && !movingDown){
-        dx = 0;
-        dy = -wd/50;
-    }
-    if ((event.keyCode == 39 || event.keyCode == 68) && !movingLeft){
-        dx = wd/50;
-        dy = 0;
-    }
-    if ((event.keyCode == 40 || event.keyCode == 83) && !movingUp){
-        dx = 0;
-        dy = wd/50;
+        if (turning) return;
+
+        turning = true;
+
+        const movingUp = (dy === -wd/50);
+        const movingDown = (dy === wd/50);
+        const movingLeft = (dx === -wd/50);
+        const movingRight = (dx === wd/50);
+
+        if ((event.keyCode == 37 || event.keyCode == 65) && !movingRight){
+            dx = -wd/50;
+            dy = 0;
+        }
+        if ((event.keyCode == 38 || event.keyCode == 87) && !movingDown){
+            dx = 0;
+            dy = -wd/50;
+        }
+        if ((event.keyCode == 39 || event.keyCode == 68) && !movingLeft){
+            dx = wd/50;
+            dy = 0;
+        }
+        if ((event.keyCode == 40 || event.keyCode == 83) && !movingUp){
+            dx = 0;
+            dy = wd/50;
+        }
+    } else {
+        
+        restart();
     }
 
 }
+
+
 
 // init game
 drawBoard()
